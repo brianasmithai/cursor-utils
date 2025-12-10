@@ -1,0 +1,4 @@
+# Cursor workspace configuration
+# Keep personal commands/rules separate from the shareable catalog
+.cursor/
+
