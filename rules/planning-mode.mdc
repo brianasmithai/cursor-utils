@@ -1,0 +1,29 @@
+# Planning Mode Rules
+
+// Description: Rules for working with Cursor plan files (.plan.md)
+// Recommended globs: **/*.plan.md
+
+## Plan File Structure
+
+Plan files use YAML frontmatter with a `todos` array. All actionable work items MUST be listed in this `todos` section, not just in the markdown body.
+
+## Required Behaviors
+
+1. **Always populate the todos section**: When creating or updating a plan, ensure ALL work items are listed in the YAML `todos` array. The markdown body provides context, but the `todos` section is the source of truth for actionable work.
+
+2. **Never remove todos**: You may update a todo's `status` (pending, in_progress, completed, cancelled), but you must NEVER remove a todo from the list unless explicitly instructed by the user.
+
+3. **Todos enable parallel agents**: The `todos` section is how work gets spun off to separate agents. Each todo can be assigned to an agent independently. Removing or omitting todos breaks this workflow.
+
+## Todo Format
+
+Each todo in the YAML frontmatter must have:
+- `id`: Unique identifier (e.g., "phase3-task2")
+- `content`: Description of the work item
+- `status`: One of pending, in_progress, completed, cancelled
+
+## Workflow
+
+- When phases/tasks are defined in the plan body, mirror them as todos in the frontmatter
+- When completing work, update status to "completed" but keep the todo in the list
+- When work is cancelled, update status to "cancelled" but keep the todo in the list
